@@ -1,0 +1,71 @@
+$font-stack: Helvetica,
+sans-serif;
+$font-brand: Helvetica,
+sans-serif;
+$primary-color: #333;
+$radiusBorder: 3px;
+
+/* ==========================================================================
+   Shared Styles
+   ========================================================================== */
+
+a:link {
+    text-decoration: none;
+    color: $primary-color;
+    font-family: $font-stack;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.wrapper {
+    width: 80%;
+    margin: 5px auto;
+}
+
+
+/* ==========================================================================
+   Navigation Bar Styles
+   ========================================================================== */
+
+.nav {
+    color: white;
+    background: #333;
+    height: 50px;
+    border-radius: $radiusBorder;
+    .navContainer {
+        a {
+            position: relative;
+            display: block;
+            padding: 16px 25px;
+            color: white;
+        }
+
+        a:hover,
+        a:focus {
+            text-decoration: none;
+            background-color: #444;
+        }
+        .navBrand {
+          
+        }
+        .navMenu {
+            list-style: none;
+            ul {
+                padding: 0;
+                margin: 0;
+                li {
+                    position: relative;
+                    display: inline-block;
+                }
+                li.active {
+                    a {
+                        color: #9C9C9C;
+                        background: #222;
+                    }
+                }
+            }
+        }
+    }
+}
