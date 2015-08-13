@@ -3,25 +3,43 @@ sans-serif;
 $font-brand: Helvetica,
 sans-serif;
 $text-color: #333;
-
-$tablet-width: 768px;
-$desktop-width: 1024px;
+$small-width: 640px;
+$medium-width: 1024px;
+$large-width: 1600px;
+$small-numOfCol: 1;
+$medium-numOfCol: 2;
+$large-numOfCol: 3;
+$contentItemPadding: 15px;
+$contentItemMargin: 10px;
 
 /* ==========================================================================
    RESPONSIVE Styles
    ========================================================================== */
 
-@mixin tablet {
-  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
-    @content;
-  }
+@mixin small {
+    @media (max-width: #{$small-width - 1px}) {
+        @content;
+    }
 }
 
-@mixin desktop {
-  @media (min-width: #{$desktop-width}) {
-    @content;
-  }
+@mixin normal {
+    @media (min-width: #{$small-width}) and (max-width: #{$medium-width - 1px}) {
+        @content;
+    }
 }
+
+@mixin medium {
+    @media (min-width: #{$medium-width}) and (max-width: #{$large-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin large {
+    @media (min-width: #{$large-width}) {
+        @content;
+    }
+}
+
 
 /* ==========================================================================
    GENERAL Styles
@@ -40,20 +58,32 @@ a:link {
 .wrapper {
     width: 80%;
     margin: 5px auto;
+    :after {
+        content: "";
+        clear: both;
+    }
 }
 
-.radius{
+.radius {
     border-radius: 5px;
 }
 
-.transition{
+.transition {
     -webkit-transition: all 1s;
-            transition: all 1s;
+    transition: all 1s;
 }
 
-.bg-primary{
-    background : #333;
+.bg-primary {
+    background: #333;
 }
+
+.shadow {
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    -moz-box-shadow: 0 10px 6px -6px #777;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+    border-bottom: 0 none;
+}
+
 
 /* ==========================================================================
    NAVIGATION BAR Styles
@@ -62,7 +92,6 @@ a:link {
 .nav {
     color: white;
     height: 50px;
-    
     .navContainer {
         a {
             position: relative;
@@ -71,16 +100,15 @@ a:link {
             color: white;
             @extend .transition;
         }
-
         a:hover,
         a:focus {
             text-decoration: none;
             background-color: #444;
-            color:#B1E3FF;
+            color: #B1E3FF;
         }
         .navBrand {
-          text-transform: uppercase;
-          font-weight: bold;
+            text-transform: uppercase;
+            font-weight: bold;
         }
         .navMenu {
             list-style: none;
@@ -102,6 +130,7 @@ a:link {
     }
 }
 
+
 /* ==========================================================================
    HEADER Styles
    ========================================================================== */
@@ -110,8 +139,57 @@ a:link {
 /* ==========================================================================
    CONTENT Styles
    ========================================================================== */
-.content{
-    .contentItem{
 
+@mixin getItemWidth($col) {
+    width: calc(( 100% - #{$col} * 2 * #{$contentItemPadding} - #{$col} * 2 * #{$contentItemMargin} - 10px) / #{$col});
+}
+
+.content {
+    width: 100%;
+    .contentItem {
+        margin: 10px $contentItemMargin;
+        padding: 10px $contentItemPadding;
+        border-radius: 2px;
+        @include large {
+            @include getItemWidth($large-numOfCol);
+        }
+        @include normal {
+            @include getItemWidth($small-numOfCol);
+        }
+        @include medium {
+            @include getItemWidth($medium-numOfCol);
+        }
+        @include small {
+            @include getItemWidth($small-numOfCol);
+        }
+        .itemHeading {
+            display: inline-block;
+            width: 100%;
+            h2 {
+                border-bottom: 3px solid #555;
+                float: left;
+                width: 75%;
+                display: block;
+                overflow: hidden;
+                font-weight: bold;
+                font-size: 30px;
+                text-shadow: 0 0 1px black;
+            }
+            img {
+                float: right;
+                max-width: 80px;
+                max-height: 60px;
+            }
+        }
+        .itemBody {
+            height: 150px;
+            display: inline-block;
+            overflow: hidden;
+            p {
+                font-style: italic;
+                font-size: 20px;
+                
+            }
+        }
     }
 }
