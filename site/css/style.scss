@@ -1,17 +1,17 @@
-$font-stack: Helvetica,
+$fontStack: Helvetica,
 sans-serif;
-$font-brand: Helvetica,
+$fontBrand: Helvetica,
 sans-serif;
 $text-color: #333;
 $bg: #EEEEEE;
 $bgItem: white;
 $bgHeader: white;
-$small-width: 640px;
-$medium-width: 1024px;
-$large-width: 1600px;
-$small-numOfCol: 1;
-$medium-numOfCol: 2;
-$large-numOfCol: 3;
+$smallScreen: 640px;
+$mediumScreen: 1024px;
+$largeScreen: 1600px;
+$smallColNumber: 1;
+$mediumColNumber: 2;
+$largeColNumber: 3;
 $contentItemPadding: 15px;
 $contentItemMargin: 10px;
 
@@ -20,29 +20,30 @@ $contentItemMargin: 10px;
    ========================================================================== */
 
 @mixin small {
-    @media (max-width: #{$small-width - 1px}) {
+    @media (max-width: #{$smallScreen - 1px}) {
         @content;
     }
 }
 
 @mixin normal {
-    @media (min-width: #{$small-width}) and (max-width: #{$medium-width - 1px}) {
+    @media (min-width: #{$smallScreen}) and (max-width: #{$mediumScreen - 1px}) {
         @content;
     }
 }
 
 @mixin medium {
-    @media (min-width: #{$medium-width}) and (max-width: #{$large-width - 1px}) {
+    @media (min-width: #{$mediumScreen}) and (max-width: #{$largeScreen - 1px}) {
         @content;
     }
 }
 
 @mixin large {
-    @media (min-width: #{$large-width}) {
+    @media (min-width: #{$largeScreen}) {
         @content;
     }
 }
 
+article, aside, figcaption, figure, footer, header, hgroup, nav, section { display: block; } 
 
 /* ==========================================================================
    GENERAL Styles
@@ -55,7 +56,7 @@ body {
 a:link {
     text-decoration: none;
     color: $text-color;
-    font-family: $font-stack;
+    font-family: $fontStack;
 }
 
 .inline {
@@ -113,7 +114,7 @@ a:link {
     .navContainer {
         a {
             position: relative;
-            display: block;
+            display: inline-block;
             padding: 15px 25px;
             color: white;
             @extend .transition;
@@ -164,7 +165,7 @@ a:link {
     .headContainer {
         text-align: center;
         h1 {
-            font-family: $font-brand;
+            font-family: $fontBrand;
             text-shadow: 0 0 4px #009CFF;
         }
         img {
@@ -196,16 +197,16 @@ a:link {
         border-radius: 2px;
         background: $bgItem;
         @include large {
-            @include getItemWidth($large-numOfCol);
+            @include getItemWidth($largeColNumber);
         }
         @include normal {
-            @include getItemWidth($small-numOfCol);
+            @include getItemWidth($smallColNumber);
         }
         @include medium {
-            @include getItemWidth($medium-numOfCol);
+            @include getItemWidth($mediumColNumber);
         }
         @include small {
-            @include getItemWidth($small-numOfCol);
+            @include getItemWidth($smallColNumber);
         }
         .itemHeading {
             display: inline-block;
